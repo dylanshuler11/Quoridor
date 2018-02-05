@@ -13,10 +13,11 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <SurfaceView
+        <com.example.shuler18.quoridor.gameBoard
             android:id="@+id/board"
             android:layout_width="match_parent"
             android:layout_height="700dp"
+            android:background="@android:color/background_light"
             android:layout_weight="10" />
 
         <LinearLayout
