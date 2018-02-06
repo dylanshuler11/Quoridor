@@ -39,7 +39,7 @@ public class gameBoard extends SurfaceView {
     public void onDraw(Canvas canvas)
     {
         int curX, curY, margin, squareSize;
-        float x = 0,y=0,radius=0;
+        float x0=0,y0=0,r0=0,x1=0,y1=0,r1=0;
         SurfaceView sv = (SurfaceView)findViewById(R.id.board);
 
         Paint brownPaint = new Paint();
@@ -49,11 +49,18 @@ public class gameBoard extends SurfaceView {
         Paint bluePaint = new Paint();
         bluePaint.setColor(Color.BLUE);
 
-        curX = 600;
-        curY = 10;
-        squareSize = 100;
-        margin = 150;
+        margin = canvas.getHeight() / 9 - 10;
+        squareSize = margin * 2 / 3;
 
+
+        int startingX = canvas.getWidth() - margin * 10;
+        int startingY = canvas.getHeight() - margin * 10 + squareSize;
+
+        curX = startingX;
+        curY = startingY;
+
+
+        //draws board
         for(int i = 0; i < 9; i++)
         {
 
@@ -64,20 +71,27 @@ public class gameBoard extends SurfaceView {
                 
                 if(j == 4 && i == 1)
                 {
-                    x = curX+(squareSize*.5f);
-                    y = curY+(squareSize*.5f);
-                    radius = squareSize*.45f;
+                    x0 = curX+(squareSize*.5f);
+                    y0 = curY+(squareSize*.5f);
+                    r0 = squareSize*.45f;
+                }
 
-                    canvas.drawCircle(x,y,radius, redPaint);
-
+                if(j == 6 && i == 6)
+                {
+                    x1 = curX+(squareSize*.5f);
+                    y1 = curY+(squareSize*.5f);
+                    r1 = squareSize*.45f;
                 }
 
             }
-            curX = 600;
+            curX = startingX;
             curY += margin;
         }
         //canvas.drawCircle(x,y,radius, redPaint);
         //canvas.drawRect(10,10,110,110, brownPaint);
+
+        canvas.drawCircle(x0,y0,r0, redPaint);
+        canvas.drawCircle(x1,y1,r1, bluePaint);
 
     }
 
