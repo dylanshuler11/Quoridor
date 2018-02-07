@@ -14,7 +14,8 @@ import android.view.SurfaceView;
 
 public class gameBoard extends SurfaceView {
 
-    private Paint brownPaint, redPaint, bluePaint, wallPaint;
+
+    private Paint brownPaint, redPaint, bluePaint, wallPaint; //create paint colors
     private SurfaceView sv;
 
     private int svHeight, svWidth, criticalSize, margin, squareSize, boardSize, startingX,
@@ -40,6 +41,7 @@ public class gameBoard extends SurfaceView {
     {
         setWillNotDraw(false);
 
+        //sets colors for layout of the game
         brownPaint = new Paint();
         brownPaint.setColor(0xFFDEB887);
         redPaint = new Paint();
@@ -51,9 +53,14 @@ public class gameBoard extends SurfaceView {
 
         sv = (SurfaceView)findViewById(R.id.board);
 
-        updateGlobalMeas();
+        updateGlobalMeas(); //call method
     }
 
+    /*
+     * draws gameboard
+     * at the moment, board is drawn like it is mid-game
+     * will be changed to draw board during anytime
+     */
     @Override
     public void onDraw(Canvas canvas)
     {
@@ -61,7 +68,7 @@ public class gameBoard extends SurfaceView {
 
         float x0=0,y0=0,r0=0,x1=0,y1=0,r1=0;
 
-        updateGlobalMeas();
+        updateGlobalMeas(); //call method
 
         curX = startingX;
         curY = startingY;
@@ -91,7 +98,7 @@ public class gameBoard extends SurfaceView {
                     r1 = squareSize*.45f;
                 }
 
-                //draw horz wall
+                //draw horizontal wall
                 if(i == 2 && j == 3)
                 {
                     canvas.drawRect(
@@ -102,7 +109,7 @@ public class gameBoard extends SurfaceView {
                             wallPaint);
                 }
 
-                //draw vert wall
+                //draw vertical wall
                 if(i == 1 && j == 5)
                 {
                     canvas.drawRect(
@@ -121,14 +128,20 @@ public class gameBoard extends SurfaceView {
         //canvas.drawCircle(x,y,radius, redPaint);
         //canvas.drawRect(10,10,110,110, brownPaint);
 
+        //draws circle using values set in for loop
         canvas.drawCircle(x0,y0,r0, redPaint);
         canvas.drawCircle(x1,y1,r1, bluePaint);
 
+        //calls method to draw player's remaining walls
         drawP1RemainingWalls(canvas);
         drawP2RemainingWalls(canvas);
 
     }
 
+    /*
+     * method goes through global variables and sets them
+     * called during initialization of board and when vars need updating
+     */
     void updateGlobalMeas()
     {
         svHeight = sv.getHeight();
@@ -144,6 +157,10 @@ public class gameBoard extends SurfaceView {
         wallWid = ( margin - squareSize ) / 2;
     }
 
+    /*
+     * draws player 1's remaining walls on the side of the board
+     * called when player uses wall and needs to update their walls
+     */
     void drawP1RemainingWalls(Canvas canvas)
     {
         int curX, curY;
@@ -160,6 +177,10 @@ public class gameBoard extends SurfaceView {
         }
     }
 
+    /*
+     * draws player 2's remaining walls on the side of the board
+     * called when player uses wall and needs to update their walls
+     */
     void drawP2RemainingWalls(Canvas canvas)
     {
         int curX, curY;
